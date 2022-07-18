@@ -29,3 +29,7 @@ type Group struct {
 	LDAPCN                         string `json:"ldap_cn"`
 	LDAPAccess                     string `json:"ldap_access"`
 }
+
+func New() *Group {
+	return &Group{}
+}

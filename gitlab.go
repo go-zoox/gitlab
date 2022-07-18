@@ -3,7 +3,10 @@ package gitlab
 import (
 	"github.com/go-zoox/gitlab/branch"
 	"github.com/go-zoox/gitlab/config"
+	"github.com/go-zoox/gitlab/group"
+	"github.com/go-zoox/gitlab/merge_request"
 	"github.com/go-zoox/gitlab/repository"
+	"github.com/go-zoox/gitlab/webhook"
 )
 
 type Client struct {
@@ -40,6 +43,18 @@ func (c *Client) Repository() *repository.Repository {
 
 func (c *Client) Branch() *branch.Branch {
 	return branch.New()
+}
+
+func (c *Client) MergeRequest() *merge_request.MergeRequest {
+	return merge_request.New()
+}
+
+func (c *Client) WebHook() *webhook.WebHook {
+	return webhook.New()
+}
+
+func (c *Client) Group() *group.Group {
+	return group.New()
 }
 
 func LoadConfig() error {
