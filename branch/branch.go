@@ -6,6 +6,12 @@ import (
 	"github.com/go-zoox/gitlab/client"
 )
 
+type BranchImpl interface {
+	Create(req *CreateRequest) (*Branch, error)
+	Get(req *GetRequest) (*Branch, error)
+	Delete(req *DeleteRequest) error
+}
+
 type Branch struct {
 	client client.Client
 	//
@@ -37,7 +43,7 @@ type Commit struct {
 	ParentIDs      []string  `json:"parent_ids"`
 }
 
-func New(client client.Client) *Branch {
+func New(client client.Client) BranchImpl {
 	return &Branch{
 		client: client,
 	}

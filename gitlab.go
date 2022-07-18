@@ -69,23 +69,23 @@ func (c *Client) Request(cfg *request.Config, payload *request.Payload) (*reques
 	return request.Request(cfg, payload)
 }
 
-func (c *Client) Repository() *repository.Repository {
+func (c *Client) Repository() repository.RepositoryImpl {
 	return repository.New(c)
 }
 
-func (c *Client) Branch() *branch.Branch {
+func (c *Client) Branch() branch.BranchImpl {
 	return branch.New(c)
 }
 
-func (c *Client) MergeRequest() *merge_request.MergeRequest {
+func (c *Client) MergeRequest() merge_request.MergeRequestImpl {
 	return merge_request.New(c)
 }
 
-func (c *Client) WebHook() *webhook.WebHook {
+func (c *Client) WebHook() webhook.WebHookImpl {
 	return webhook.New(c)
 }
 
-func (c *Client) Group() *group.Group {
+func (c *Client) Group() group.GroupImpl {
 	return group.New(c)
 }
 

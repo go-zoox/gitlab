@@ -6,6 +6,13 @@ import (
 	"github.com/go-zoox/gitlab/client"
 )
 
+type RepositoryImpl interface {
+	List(cfg *ListRequest) (*[]Repository, error)
+	Create(req *CreateRequest) (*Repository, error)
+	Get(projectID int64) (*Repository, error)
+	Delete(projectID int64) error
+}
+
 type Repository struct {
 	client client.Client
 	//
@@ -37,7 +44,7 @@ type Namespace struct {
 	WebURL    string `json:"web_url"`
 }
 
-func New(client client.Client) *Repository {
+func New(client client.Client) RepositoryImpl {
 	return &Repository{
 		client: client,
 	}

@@ -6,6 +6,12 @@ import (
 	"github.com/go-zoox/gitlab/client"
 )
 
+type GroupImpl interface {
+	List(cfg *ListRequest) (*[]Group, error)
+	Get(cfg *GetRequest) (*Group, error)
+	Search(keyword string) (*[]Group, error)
+}
+
 type Group struct {
 	client client.Client
 	//
@@ -36,7 +42,7 @@ type Group struct {
 	LDAPAccess                     string `json:"ldap_access"`
 }
 
-func New(client client.Client) *Group {
+func New(client client.Client) GroupImpl {
 	return &Group{
 		client: client,
 	}

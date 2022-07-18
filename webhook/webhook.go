@@ -6,6 +6,13 @@ import (
 	"github.com/go-zoox/gitlab/client"
 )
 
+type WebHookImpl interface {
+	List(*ListRequest) (*[]WebHook, error)
+	Create(*CreateRequest) (*WebHook, error)
+	Get(*GetRequest) (*WebHook, error)
+	Delete(*DeleteRequest) error
+}
+
 type WebHook struct {
 	client client.Client
 	//
@@ -29,7 +36,7 @@ type WebHook struct {
 	EnableSSLVerification    bool      `json:"enable_ssl_verification"`
 }
 
-func New(client client.Client) *WebHook {
+func New(client client.Client) WebHookImpl {
 	return &WebHook{
 		client: client,
 	}

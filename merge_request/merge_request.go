@@ -6,6 +6,14 @@ import (
 	"github.com/go-zoox/gitlab/client"
 )
 
+type MergeRequestImpl interface {
+	Create(req *CreateRequest) (*MergeRequest, error)
+	Get(req *GetRequest) (*MergeRequest, error)
+	Delete(req *DeleteRequest) error
+	Approve(req *ApproveRequest) (*ApproveResponse, error)
+	Merge(req *MergeeRequest) (*MergeResponse, error)
+}
+
 type MergeRequest struct {
 	client client.Client
 	//
@@ -44,7 +52,7 @@ type User struct {
 	WebURL    string `json:"web_url"`
 }
 
-func New(client client.Client) *MergeRequest {
+func New(client client.Client) MergeRequestImpl {
 	return &MergeRequest{
 		client: client,
 	}
