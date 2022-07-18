@@ -3,6 +3,7 @@ package merge_request
 import (
 	"strconv"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -16,8 +17,8 @@ type DeleteRequest struct {
 	MergeRequestID int64 `json:"merge_request_id"`
 }
 
-func Delete(cfg *DeleteRequest) error {
-	_, err := request.Request(DeleteConfig, &request.Payload{
+func Delete(client client.Client, cfg *DeleteRequest) error {
+	_, err := client.Request(DeleteConfig, &request.Payload{
 		Params: map[string]string{
 			"project_id":       strconv.Itoa(int(cfg.ProjectID)),
 			"merge_request_id": strconv.Itoa(int(cfg.MergeRequestID)),

@@ -3,6 +3,7 @@ package group
 import (
 	"strconv"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -20,8 +21,8 @@ type GetRequest struct {
 
 type GetResponse = Group
 
-func Get(cfg *GetRequest) (*GetResponse, error) {
-	response, err := request.Request(GetConfig, &request.Payload{
+func Get(client client.Client, cfg *GetRequest) (*GetResponse, error) {
+	response, err := client.Request(GetConfig, &request.Payload{
 		Params: map[string]string{
 			"group_id": strconv.Itoa(int(cfg.GroupID)),
 		},

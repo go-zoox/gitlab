@@ -3,6 +3,7 @@ package webhook
 import (
 	"strconv"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -29,8 +30,8 @@ type CreateRequest struct {
 
 type CreateResponse = WebHook
 
-func Create(req *CreateRequest) (*CreateResponse, error) {
-	response, err := request.Request(CreateConfig, &request.Payload{
+func Create(client client.Client, req *CreateRequest) (*CreateResponse, error) {
+	response, err := client.Request(CreateConfig, &request.Payload{
 		Params: map[string]string{
 			"project_id": strconv.Itoa(int(req.ProjectID)),
 		},

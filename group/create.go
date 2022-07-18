@@ -1,33 +1,35 @@
-package branch
+package group
 
 import (
-	"strconv"
-
 	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
 var CreateConfig = &request.Config{
 	Action:   "POST",
-	Resource: "projects/:project_id/repository/branches",
+	Resource: "groups",
 }
 
 type CreateRequest struct {
-	ProjectID int64  `json:"project_id"`
-	Name      string `json:"name"`
-	Ref       string `json:"ref"`
+	Name        string `json:"name"`
+	Path        string `json:"path"`
+	Description string `json:"description"`
+	Visibility  string `json:"visibility"` // private, internal, public, default: private
 }
 
-type CreateResponse = Branch
+type CreateResponse = Group
 
 func Create(client client.Client, req *CreateRequest) (*CreateResponse, error) {
+	if req.Visibility == "" {
+		req.Visibility = "private"
+	}
+
 	response, err := client.Request(CreateConfig, &request.Payload{
-		Params: map[string]string{
-			"project_id": strconv.Itoa(int(req.ProjectID)),
-		},
-		Query: map[string]string{
-			"branch": req.Name,
-			"ref":    req.Ref,
+		Body: map[string]interface{}{
+			"name":        req.Name,
+			"path":        req.Path,
+			"description": req.Description,
+			"visibility":  req.Visibility,
 		},
 	})
 

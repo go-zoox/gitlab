@@ -3,6 +3,7 @@ package repository
 import (
 	"strconv"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -16,8 +17,8 @@ var GetConfig = &request.Config{
 
 type GetResponse = Repository
 
-func Get(id int64) (*GetResponse, error) {
-	response, err := request.Request(GetConfig, &request.Payload{
+func Get(client client.Client, id int64) (*GetResponse, error) {
+	response, err := client.Request(GetConfig, &request.Payload{
 		Params: map[string]string{
 			"project_id": strconv.Itoa(int(id)),
 		},

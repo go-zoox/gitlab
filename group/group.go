@@ -1,8 +1,14 @@
 package group
 
-import "time"
+import (
+	"time"
+
+	"github.com/go-zoox/gitlab/client"
+)
 
 type Group struct {
+	client client.Client
+	//
 	ID          int64     `json:"id"`
 	Name        string    `json:"name"`
 	Path        string    `json:"path"`
@@ -30,6 +36,20 @@ type Group struct {
 	LDAPAccess                     string `json:"ldap_access"`
 }
 
-func New() *Group {
-	return &Group{}
+func New(client client.Client) *Group {
+	return &Group{
+		client: client,
+	}
+}
+
+func (g *Group) List(cfg *ListRequest) (*[]Group, error) {
+	return List(g.client, cfg)
+}
+
+func (g *Group) Get(cfg *GetRequest) (*Group, error) {
+	return Get(g.client, cfg)
+}
+
+func (g *Group) Search(keyword string) (*[]Group, error) {
+	return Search(g.client, keyword)
 }

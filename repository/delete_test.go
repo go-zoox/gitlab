@@ -3,6 +3,7 @@ package repository
 import (
 	"testing"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/config"
 )
 
@@ -11,7 +12,7 @@ func TestDelete(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if err := Delete(6); err != nil {
+	if err := Delete(&client.MockClient{}, 6); err != nil {
 		t.Fatal(err)
 	}
 }

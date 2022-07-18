@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/go-zoox/core-utils/fmt"
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/config"
 )
 
@@ -12,7 +13,7 @@ func TestMerge(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	repo, err := Merge(&MergeeRequest{
+	repo, err := Merge(&client.MockClient{}, &MergeeRequest{
 		ProjectID:      3,
 		MergeRequestID: 1,
 	})

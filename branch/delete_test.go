@@ -3,6 +3,7 @@ package branch
 import (
 	"testing"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/config"
 )
 
@@ -11,7 +12,7 @@ func TestDelete(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if err := Delete(&DeleteRequest{
+	if err := Delete(client.NewMockClient(), &DeleteRequest{
 		ProjectID: 3,
 		Name:      "feat/test-from-gosdk",
 	}); err != nil {

@@ -3,14 +3,17 @@ module github.com/go-zoox/gitlab
 go 1.18
 
 require (
-	github.com/go-zoox/core-utils v1.0.10
+	github.com/go-zoox/core-utils v1.0.11
 	github.com/go-zoox/dotenv v1.0.7
 	github.com/go-zoox/fetch v1.3.3
+	github.com/go-zoox/fs v1.2.4
 )
 
 require (
 	github.com/fatih/color v1.13.0 // indirect
+	github.com/go-zoox/uuid v0.0.1 // indirect
 	github.com/goccy/go-yaml v1.9.5 // indirect
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/joho/godotenv v1.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect

@@ -8,14 +8,16 @@ import (
 	"github.com/go-zoox/gitlab/config"
 )
 
-func TestList(t *testing.T) {
+func TestCreate(t *testing.T) {
 	if err := config.Load(); err != nil {
 		t.Fatal(err)
 	}
 
-	repo, err := List(client.NewMockClient(), &ListRequest{
-		// Search: "",
+	repo, err := Create(client.NewMockClient(), &CreateRequest{
+		Name: "test-group",
+		Path: "test-group",
 	})
+
 	if err != nil {
 		t.Fatal(err)
 	}

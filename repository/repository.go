@@ -1,8 +1,14 @@
 package repository
 
-import "time"
+import (
+	"time"
+
+	"github.com/go-zoox/gitlab/client"
+)
 
 type Repository struct {
+	client client.Client
+	//
 	ID            int64     `json:"id"`
 	Name          string    `json:"name"`
 	Path          string    `json:"path_with_namespace"`
@@ -31,18 +37,24 @@ type Namespace struct {
 	WebURL    string `json:"web_url"`
 }
 
-func New() *Repository {
-	return &Repository{}
+func New(client client.Client) *Repository {
+	return &Repository{
+		client: client,
+	}
+}
+
+func (r *Repository) List(cfg *ListRequest) (*[]Repository, error) {
+	return List(r.client, cfg)
 }
 
 func (r *Repository) Create(req *CreateRequest) (*Repository, error) {
-	return Create(req)
+	return Create(r.client, req)
 }
 
 func (r *Repository) Get(projectID int64) (*Repository, error) {
-	return Get(projectID)
+	return Get(r.client, projectID)
 }
 
 func (r *Repository) Delete(projectID int64) error {
-	return Delete(projectID)
+	return Delete(r.client, projectID)
 }

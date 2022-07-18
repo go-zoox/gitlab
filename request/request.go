@@ -34,7 +34,9 @@ type Payload struct {
 	Body    map[string]interface{}
 }
 
-func Request(cfg *Config, payload *Payload) (*fetch.Response, error) {
+type Response = fetch.Response
+
+func Request(cfg *Config, payload *Payload) (*Response, error) {
 	service := cfg.Service
 	token := cfg.Token
 	version := cfg.Version

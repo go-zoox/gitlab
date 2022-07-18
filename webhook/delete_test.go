@@ -3,6 +3,7 @@ package webhook
 import (
 	"testing"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/config"
 )
 
@@ -11,7 +12,7 @@ func TestDelete(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if err := Delete(&DeleteRequest{
+	if err := Delete(&client.MockClient{}, &DeleteRequest{
 		ProjectID: 3,
 		WebHookID: 7,
 	}); err != nil {

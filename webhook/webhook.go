@@ -1,8 +1,14 @@
 package webhook
 
-import "time"
+import (
+	"time"
+
+	"github.com/go-zoox/gitlab/client"
+)
 
 type WebHook struct {
+	client client.Client
+	//
 	ID                       int64     `json:"id"`
 	ProjectID                int64     `json:"project_id"`
 	URL                      string    `json:"url"`
@@ -23,18 +29,24 @@ type WebHook struct {
 	EnableSSLVerification    bool      `json:"enable_ssl_verification"`
 }
 
-func New() *WebHook {
-	return &WebHook{}
+func New(client client.Client) *WebHook {
+	return &WebHook{
+		client: client,
+	}
 }
 
-func (r *WebHook) Create(req *CreateRequest) (*WebHook, error) {
-	return Create(req)
+func (w *WebHook) List(cfg *ListRequest) (*[]WebHook, error) {
+	return List(w.client, cfg)
 }
 
-func (r *WebHook) Get(req *GetRequest) (*WebHook, error) {
-	return Get(req)
+func (w *WebHook) Create(req *CreateRequest) (*WebHook, error) {
+	return Create(w.client, req)
 }
 
-func (r *WebHook) Delete(req *DeleteRequest) error {
-	return Delete(req)
+func (w *WebHook) Get(req *GetRequest) (*WebHook, error) {
+	return Get(w.client, req)
+}
+
+func (w *WebHook) Delete(req *DeleteRequest) error {
+	return Delete(w.client, req)
 }

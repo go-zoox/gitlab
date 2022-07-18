@@ -1,6 +1,7 @@
 package group
 
 import (
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -15,8 +16,8 @@ type ListRequest struct {
 
 type ListResponse = []Group
 
-func List(cfg *ListRequest) (*ListResponse, error) {
-	response, err := request.Request(ListConfig, &request.Payload{
+func List(client client.Client, cfg *ListRequest) (*ListResponse, error) {
+	response, err := client.Request(ListConfig, &request.Payload{
 		Query: map[string]string{
 			"search": cfg.Search,
 		},

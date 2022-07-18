@@ -1,8 +1,14 @@
 package merge_request
 
-import "time"
+import (
+	"time"
+
+	"github.com/go-zoox/gitlab/client"
+)
 
 type MergeRequest struct {
+	client client.Client
+	//
 	ID              int64     `json:"id"`
 	IID             int64     `json:"iid"`
 	ProjectID       int64     `json:"project_id"`
@@ -38,26 +44,28 @@ type User struct {
 	WebURL    string `json:"web_url"`
 }
 
-func New() *MergeRequest {
-	return &MergeRequest{}
+func New(client client.Client) *MergeRequest {
+	return &MergeRequest{
+		client: client,
+	}
 }
 
 func (r *MergeRequest) Create(req *CreateRequest) (*MergeRequest, error) {
-	return Create(req)
+	return Create(r.client, req)
 }
 
 func (r *MergeRequest) Get(req *GetRequest) (*MergeRequest, error) {
-	return Get(req)
+	return Get(r.client, req)
 }
 
 func (r *MergeRequest) Delete(req *DeleteRequest) error {
-	return Delete(req)
+	return Delete(r.client, req)
 }
 
 func (r *MergeRequest) Approve(req *ApproveRequest) (*ApproveResponse, error) {
-	return Approve(req)
+	return Approve(r.client, req)
 }
 
 func (r *MergeRequest) Merge(req *MergeeRequest) (*MergeResponse, error) {
-	return Merge(req)
+	return Merge(r.client, req)
 }

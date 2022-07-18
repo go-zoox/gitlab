@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -22,8 +23,8 @@ type CreateRequest struct {
 
 type CreateResponse = Repository
 
-func Create(req *CreateRequest) (*CreateResponse, error) {
-	response, err := request.Request(CreateConfig, &request.Payload{
+func Create(client client.Client, req *CreateRequest) (*CreateResponse, error) {
+	response, err := client.Request(CreateConfig, &request.Payload{
 		Body: map[string]interface{}{
 			"namespace_id":           req.NamespaceID,
 			"name":                   req.Name,

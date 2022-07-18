@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/go-zoox/core-utils/fmt"
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/config"
 )
 
@@ -12,7 +13,7 @@ func TestSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	repo, err := Search("the_new_group")
+	repo, err := Search(client.NewMockClient(), "the_new_group")
 	if err != nil {
 		t.Fatal(err)
 	}

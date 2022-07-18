@@ -3,6 +3,7 @@ package branch
 import (
 	"strconv"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -19,8 +20,8 @@ type DeleteRequest struct {
 	Name      string `json:"branch_name"`
 }
 
-func Delete(cfg *DeleteRequest) error {
-	_, err := request.Request(DeleteConfig, &request.Payload{
+func Delete(client client.Client, cfg *DeleteRequest) error {
+	_, err := client.Request(DeleteConfig, &request.Payload{
 		Params: map[string]string{
 			"project_id":  strconv.Itoa(int(cfg.ProjectID)),
 			"branch_name": cfg.Name,

@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/go-zoox/core-utils/fmt"
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/config"
 )
 
@@ -12,7 +13,7 @@ func TestCreate(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	repo, err := Create(&CreateRequest{
+	repo, err := Create(&client.MockClient{}, &CreateRequest{
 		ProjectID:    3,
 		SourceBranch: "fix/test-create-branch2",
 		TargetBranch: "master",

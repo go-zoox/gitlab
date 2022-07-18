@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -26,8 +27,8 @@ type MergeeRequest struct {
 
 type MergeResponse = MergeRequest
 
-func Merge(req *MergeeRequest) (*MergeResponse, error) {
-	response, err := request.Request(MergeConfig, &request.Payload{
+func Merge(client client.Client, req *MergeeRequest) (*MergeResponse, error) {
+	response, err := client.Request(MergeConfig, &request.Payload{
 		Params: map[string]string{
 			"project_id":       strconv.Itoa(int(req.ProjectID)),
 			"merge_request_id": strconv.Itoa(int(req.MergeRequestID)),

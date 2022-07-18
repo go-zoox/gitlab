@@ -4,6 +4,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -34,8 +35,8 @@ type ApproveResponse struct {
 	// ApprovedBy User `json:"approved_by"`
 }
 
-func Approve(req *ApproveRequest) (*ApproveResponse, error) {
-	response, err := request.Request(ApproveConfig, &request.Payload{
+func Approve(client client.Client, req *ApproveRequest) (*ApproveResponse, error) {
+	response, err := client.Request(ApproveConfig, &request.Payload{
 		Params: map[string]string{
 			"project_id":       strconv.Itoa(int(req.ProjectID)),
 			"merge_request_id": strconv.Itoa(int(req.MergeRequestID)),

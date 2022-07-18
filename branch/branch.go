@@ -1,8 +1,14 @@
 package branch
 
-import "time"
+import (
+	"time"
+
+	"github.com/go-zoox/gitlab/client"
+)
 
 type Branch struct {
+	client client.Client
+	//
 	Name               string `json:"name"`
 	WebURL             string `json:"web_url"`
 	CanPush            bool   `json:"can_push"`
@@ -31,18 +37,20 @@ type Commit struct {
 	ParentIDs      []string  `json:"parent_ids"`
 }
 
-func New() *Branch {
-	return &Branch{}
+func New(client client.Client) *Branch {
+	return &Branch{
+		client: client,
+	}
 }
 
 func (r *Branch) Create(req *CreateRequest) (*Branch, error) {
-	return Create(req)
+	return Create(r.client, req)
 }
 
 func (r *Branch) Get(req *GetRequest) (*Branch, error) {
-	return Get(req)
+	return Get(r.client, req)
 }
 
 func (r *Branch) Delete(req *DeleteRequest) error {
-	return Delete(req)
+	return Delete(r.client, req)
 }
