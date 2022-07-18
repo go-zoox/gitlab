@@ -1,4 +1,4 @@
-package merge_request
+package group
 
 import (
 	"testing"
@@ -13,8 +13,7 @@ func TestGet(t *testing.T) {
 	}
 
 	repo, err := Get(&GetRequest{
-		ProjectID:      3,
-		MergeRequestID: 3,
+		GroupID: 2,
 	})
 	if err != nil {
 		t.Fatal(err)

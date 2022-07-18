@@ -7,15 +7,16 @@ import (
 	"github.com/go-zoox/gitlab/config"
 )
 
-func TestGet(t *testing.T) {
+func TestApprove(t *testing.T) {
 	if err := config.Load(); err != nil {
 		t.Fatal(err)
 	}
 
-	repo, err := Get(&GetRequest{
+	repo, err := Approve(&ApproveRequest{
 		ProjectID:      3,
-		MergeRequestID: 3,
+		MergeRequestID: 2,
 	})
+
 	if err != nil {
 		t.Fatal(err)
 	}

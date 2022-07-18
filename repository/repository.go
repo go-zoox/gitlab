@@ -13,6 +13,22 @@ type Repository struct {
 	HTTPURL       string    `json:"http_url_to_repo"`
 	WebURL        string    `json:"web_url"`
 	READMEURL     string    `json:"readme_url"`
+	//
+	LastActivityAt time.Time `json:"last_activity_at"`
+	Visibility     string    `json:"visibility"` // internal, public, internal_only
+	//
+	Namespace Namespace `json:"namespace"`
+}
+
+type Namespace struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+	Path string `json:"path"`
+	Kind string `json:"kind"` // group, user
+	// FullPath  string `json:"full_path"`
+	ParentID  int64  `json:"parent_id"`
+	AvatarURL string `json:"avatar_url"`
+	WebURL    string `json:"web_url"`
 }
 
 func New() *Repository {

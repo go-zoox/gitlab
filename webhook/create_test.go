@@ -1,4 +1,4 @@
-package merge_request
+package webhook
 
 import (
 	"testing"
@@ -7,15 +7,17 @@ import (
 	"github.com/go-zoox/gitlab/config"
 )
 
-func TestGet(t *testing.T) {
+func TestCreate(t *testing.T) {
 	if err := config.Load(); err != nil {
 		t.Fatal(err)
 	}
 
-	repo, err := Get(&GetRequest{
-		ProjectID:      3,
-		MergeRequestID: 3,
+	repo, err := Create(&CreateRequest{
+		ProjectID: 3,
+		URL:       "http://localhost:3000/webhook/gitlab",
+		Token:     "12345",
 	})
+
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -53,3 +53,11 @@ func (r *MergeRequest) Get(req *GetRequest) (*MergeRequest, error) {
 func (r *MergeRequest) Delete(req *DeleteRequest) error {
 	return Delete(req)
 }
+
+func (r *MergeRequest) Approve(req *ApproveRequest) (*ApproveResponse, error) {
+	return Approve(req)
+}
+
+func (r *MergeRequest) Merge(req *MergeeRequest) (*MergeResponse, error) {
+	return Merge(req)
+}

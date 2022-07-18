@@ -1,4 +1,4 @@
-package merge_request
+package repository
 
 import (
 	"testing"
@@ -7,14 +7,13 @@ import (
 	"github.com/go-zoox/gitlab/config"
 )
 
-func TestGet(t *testing.T) {
+func TestList(t *testing.T) {
 	if err := config.Load(); err != nil {
 		t.Fatal(err)
 	}
 
-	repo, err := Get(&GetRequest{
-		ProjectID:      3,
-		MergeRequestID: 3,
+	repo, err := List(&ListRequest{
+		GroupID: 2,
 	})
 	if err != nil {
 		t.Fatal(err)

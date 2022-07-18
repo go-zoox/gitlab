@@ -1,4 +1,4 @@
-package merge_request
+package webhook
 
 import (
 	"testing"
@@ -13,8 +13,8 @@ func TestGet(t *testing.T) {
 	}
 
 	repo, err := Get(&GetRequest{
-		ProjectID:      3,
-		MergeRequestID: 3,
+		ProjectID: 3,
+		WebHookID: 3,
 	})
 	if err != nil {
 		t.Fatal(err)
