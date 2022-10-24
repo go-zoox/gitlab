@@ -14,9 +14,27 @@ func TestCreate(t *testing.T) {
 	}
 
 	repo, err := Create(client.NewMockClient(), &CreateRequest{
-		ProjectID: 3,
-		Name:      "feat/test-from-gosdk",
-		Ref:       "master",
+		RepositoryID: 445,
+		Name:         "sprint_dev",
+		Ref:          "master",
+	})
+
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fmt.PrintJSON(repo)
+}
+
+func TestCreateByProjectName(t *testing.T) {
+	if err := config.Load(); err != nil {
+		t.Fatal(err)
+	}
+
+	repo, err := Create(client.NewMockClient(), &CreateRequest{
+		RepositoryName: "eunomia/eunomia-frontend",
+		Name:           "sprint_dev",
+		Ref:            "master",
 	})
 
 	if err != nil {

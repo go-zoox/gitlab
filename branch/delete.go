@@ -16,14 +16,15 @@ var DeleteConfig = &request.Config{
 }
 
 type DeleteRequest struct {
-	ProjectID int64  `json:"project_id"`
-	Name      string `json:"branch_name"`
+	// the id of the project
+	RepositoryID int64  `json:"repository_id"`
+	Name         string `json:"branch_name"`
 }
 
 func Delete(client client.Client, cfg *DeleteRequest) error {
 	_, err := client.Request(DeleteConfig, &request.Payload{
 		Params: map[string]string{
-			"project_id":  strconv.Itoa(int(cfg.ProjectID)),
+			"project_id":  strconv.Itoa(int(cfg.RepositoryID)),
 			"branch_name": cfg.Name,
 		},
 	})

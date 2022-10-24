@@ -1,4 +1,4 @@
-package branch
+package repository
 
 import (
 	"testing"
@@ -8,15 +8,12 @@ import (
 	"github.com/go-zoox/gitlab/config"
 )
 
-func TestGet(t *testing.T) {
+func TestGetByName(t *testing.T) {
 	if err := config.Load(); err != nil {
 		t.Fatal(err)
 	}
 
-	repo, err := Get(client.NewMockClient(), &GetRequest{
-		RepositoryID: 3,
-		Name:         "fix/test-create-branch",
-	})
+	repo, err := GetByName(&client.MockClient{}, "eunomia/eunomia-frontend")
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -13,8 +13,8 @@ func TestDelete(t *testing.T) {
 	}
 
 	if err := Delete(client.NewMockClient(), &DeleteRequest{
-		ProjectID: 3,
-		Name:      "feat/test-from-gosdk",
+		RepositoryID: 3,
+		Name:         "feat/test-from-gosdk",
 	}); err != nil {
 		t.Fatal(err)
 	}

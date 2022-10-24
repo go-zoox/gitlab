@@ -16,8 +16,9 @@ var GetConfig = &request.Config{
 }
 
 type GetRequest struct {
-	ProjectID int64  `json:"project_id"`
-	Name      string `json:"branch_name"`
+	// the id of the project
+	RepositoryID int64  `json:"repository_id"`
+	Name         string `json:"branch_name"`
 }
 
 type GetResponse = Branch
@@ -25,7 +26,7 @@ type GetResponse = Branch
 func Get(client client.Client, cfg *GetRequest) (*GetResponse, error) {
 	response, err := client.Request(GetConfig, &request.Payload{
 		Params: map[string]string{
-			"project_id":  strconv.Itoa(int(cfg.ProjectID)),
+			"project_id":  strconv.Itoa(int(cfg.RepositoryID)),
 			"branch_name": cfg.Name,
 		},
 	})
