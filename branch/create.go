@@ -27,7 +27,7 @@ type CreateResponse = Branch
 
 func Create(client client.Client, req *CreateRequest) (*CreateResponse, error) {
 	if req.RepositoryName != "" && req.RepositoryID == 0 {
-		repository, err := repository.GetByName(client, req.RepositoryName)
+		repository, err := repository.Get(client, req.RepositoryName)
 		if err != nil {
 			return nil, fmt.Errorf("failed to get repository by name: %v", err)
 		}

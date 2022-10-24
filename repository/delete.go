@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"strconv"
+	"fmt"
 
 	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
@@ -19,10 +19,15 @@ type DeleteResponse struct {
 	Repository
 }
 
-func Delete(client client.Client, id int64) error {
-	_, err := client.Request(DeleteConfig, &request.Payload{
+func Delete(client client.Client, name string) error {
+	project, err := Get(client, name)
+	if err != nil {
+		return err
+	}
+
+	_, err = client.Request(DeleteConfig, &request.Payload{
 		Params: map[string]string{
-			"project_id": strconv.Itoa(int(id)),
+			"project_id": fmt.Sprintf("%d", project.ID),
 		},
 	})
 

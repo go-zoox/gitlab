@@ -12,7 +12,7 @@ func TestDelete(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if err := Delete(&client.MockClient{}, 6); err != nil {
+	if err := Delete(&client.MockClient{}, "eunomia/test-from-gosdk"); err != nil {
 		t.Fatal(err)
 	}
 }

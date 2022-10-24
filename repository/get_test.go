@@ -13,7 +13,7 @@ func TestGet(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	repo, err := Get(&client.MockClient{}, 6)
+	repo, err := Get(&client.MockClient{}, "eunomia/eunomia-frontend")
 	if err != nil {
 		t.Fatal(err)
 	}

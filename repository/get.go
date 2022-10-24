@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"strconv"
+	"fmt"
 
 	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
@@ -17,21 +17,20 @@ var GetConfig = &request.Config{
 
 type GetResponse = Repository
 
-func Get(client client.Client, id int64) (*GetResponse, error) {
-	response, err := client.Request(GetConfig, &request.Payload{
-		Params: map[string]string{
-			"project_id": strconv.Itoa(int(id)),
-		},
+func Get(client client.Client, name string) (*GetResponse, error) {
+	list, err := Search(client, &SearchRequest{
+		Keyword: name,
 	})
 
 	if err != nil {
 		return nil, err
 	}
 
-	var res GetResponse
-	if err = response.UnmarshalJSON(&res); err != nil {
-		return nil, err
+	for _, one := range *list {
+		if one.Path == name {
+			return &one, nil
+		}
 	}
 
-	return &res, nil
+	return nil, fmt.Errorf("repository(%s) not found", name)
 }

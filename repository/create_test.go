@@ -14,8 +14,7 @@ func TestCreate(t *testing.T) {
 	}
 
 	repo, err := Create(&client.MockClient{}, &CreateRequest{
-		NamespaceID: "2",
-		Name:        "test-from-gosdk",
+		Name:        "eunomia/test-from-gosdk",
 		Description: "test",
 	})
 

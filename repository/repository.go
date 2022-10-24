@@ -9,8 +9,8 @@ import (
 type RepositoryImpl interface {
 	List(cfg *ListRequest) (*[]Repository, error)
 	Create(req *CreateRequest) (*Repository, error)
-	Get(projectID int64) (*Repository, error)
-	Delete(projectID int64) error
+	Get(name string) (*Repository, error)
+	Delete(name string) error
 }
 
 type Repository struct {
@@ -58,10 +58,10 @@ func (r *Repository) Create(req *CreateRequest) (*Repository, error) {
 	return Create(r.client, req)
 }
 
-func (r *Repository) Get(projectID int64) (*Repository, error) {
-	return Get(r.client, projectID)
+func (r *Repository) Get(name string) (*Repository, error) {
+	return Get(r.client, name)
 }
 
-func (r *Repository) Delete(projectID int64) error {
-	return Delete(r.client, projectID)
+func (r *Repository) Delete(name string) error {
+	return Delete(r.client, name)
 }
