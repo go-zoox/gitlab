@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"fmt"
+
 	"github.com/go-zoox/gitlab/client"
 	"github.com/go-zoox/gitlab/request"
 )
@@ -30,5 +32,5 @@ func GetByName(client client.Client, name string) (*GetByNameResponse, error) {
 		}
 	}
 
-	return nil, nil
+	return nil, fmt.Errorf("repository(%s) not found", name)
 }
