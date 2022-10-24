@@ -4,13 +4,15 @@ go 1.18
 
 require (
 	github.com/go-zoox/core-utils v1.1.0
-	github.com/go-zoox/dotenv v1.0.7
+	github.com/go-zoox/dotenv v1.2.0
 	github.com/go-zoox/fetch v1.5.5
-	github.com/go-zoox/fs v1.2.4
+	github.com/go-zoox/fs v1.3.0
 )
 
 require (
 	github.com/fatih/color v1.13.0 // indirect
+	github.com/fsnotify/fsnotify v1.6.0 // indirect
+	github.com/go-zoox/tag v1.1.0 // indirect
 	github.com/go-zoox/uuid v0.0.1 // indirect
 	github.com/goccy/go-yaml v1.9.5 // indirect
 	github.com/google/uuid v1.3.0 // indirect
