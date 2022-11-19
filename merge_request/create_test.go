@@ -14,7 +14,7 @@ func TestCreate(t *testing.T) {
 	}
 
 	repo, err := Create(&client.MockClient{}, &CreateRequest{
-		ProjectID:    3,
+		RepositoryID: 3,
 		SourceBranch: "fix/test-create-branch2",
 		TargetBranch: "master",
 		Title:        "test-create-branch2 merge request",
