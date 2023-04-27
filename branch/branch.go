@@ -7,6 +7,7 @@ import (
 )
 
 type BranchImpl interface {
+	List(req *ListRequest) (*[]Branch, error)
 	Create(req *CreateRequest) (*Branch, error)
 	Get(req *GetRequest) (*Branch, error)
 	Delete(req *DeleteRequest) error
@@ -47,6 +48,10 @@ func New(client client.Client) BranchImpl {
 	return &Branch{
 		client: client,
 	}
+}
+
+func (r *Branch) List(req *ListRequest) (*[]Branch, error) {
+	return List(r.client, req)
 }
 
 func (r *Branch) Create(req *CreateRequest) (*Branch, error) {
