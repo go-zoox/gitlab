@@ -10,6 +10,7 @@ import (
 	"github.com/go-zoox/gitlab/merge_request"
 	"github.com/go-zoox/gitlab/repository"
 	"github.com/go-zoox/gitlab/request"
+	"github.com/go-zoox/gitlab/user"
 	"github.com/go-zoox/gitlab/webhook"
 )
 
@@ -87,6 +88,10 @@ func (c *Client) WebHook() webhook.WebHookImpl {
 
 func (c *Client) Group() group.GroupImpl {
 	return group.New(c)
+}
+
+func (c *Client) User() user.UserImpl {
+	return user.New(c)
 }
 
 func LoadConfig() error {

@@ -9,7 +9,7 @@ import (
 	"github.com/go-zoox/fetch"
 )
 
-var defaulService = ""
+var defaulService = "https://gitlab.com"
 var defaultToken = ""
 var defaultVersion = "v4"
 
