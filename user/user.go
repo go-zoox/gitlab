@@ -5,6 +5,8 @@ import "github.com/go-zoox/gitlab/client"
 type UserImpl interface {
 	List(opts ...func(opt *ListRequest)) (*ListResponse, error)
 	Get(opts ...func(opt *GetRequest)) (*GetResponse, error)
+	//
+	ListALL(opts ...func(opt *ListALLRequest)) (*ListALLResponse, error)
 }
 
 type User struct {
@@ -57,4 +59,8 @@ func (u *user) List(opts ...func(opt *ListRequest)) (*ListResponse, error) {
 
 func (u *user) Get(opts ...func(opt *GetRequest)) (*GetResponse, error) {
 	return Get(u.client, opts...)
+}
+
+func (u *user) ListALL(opts ...func(opt *ListALLRequest)) (*ListALLResponse, error) {
+	return ListALL(u.client, opts...)
 }

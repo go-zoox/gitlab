@@ -8,15 +8,18 @@ import (
 	"github.com/go-zoox/gitlab/config"
 )
 
-func TestListALL(t *testing.T) {
+func TestList(t *testing.T) {
 	if err := config.Load(); err != nil {
 		t.Fatal(err)
 	}
 
-	repo, err := ListALL(client.NewMockClient())
+	repo, err := List(client.NewMockClient(), func(opt *ListRequest) {
+		opt.Page = 6
+		// opt.PerPage = 1000
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	fmt.PrintJSON(repo.Data, repo.Total)
+	fmt.PrintJSON(repo, repo.IsLastPage)
 }
