@@ -16,10 +16,11 @@ var CreateConfig = &request.Config{
 
 type CreateRequest struct {
 	// the id of the project
-	RepositoryID int64 `json:"repostory_id"`
+	RepositoryID int64  `json:"repostory_id"`
+	Name         string `json:"name"`
+
 	// the name of the project
 	RepositoryName string `json:"repository_name"`
-	Name           string `json:"name"`
 	Ref            string `json:"ref"`
 }
 
