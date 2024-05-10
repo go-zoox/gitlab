@@ -14,7 +14,7 @@ func TestMerge(t *testing.T) {
 	}
 
 	repo, err := Merge(&client.MockClient{}, &MergeeRequest{
-		ProjectID:      3,
+		RepositoryID:   3,
 		MergeRequestID: 1,
 	})
 

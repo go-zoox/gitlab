@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/go-zoox/gitlab/client"
+	"github.com/go-zoox/gitlab/repository"
 	"github.com/go-zoox/gitlab/request"
 )
 
@@ -14,7 +15,10 @@ var MergeConfig = &request.Config{
 }
 
 type MergeeRequest struct {
-	ProjectID      int64 `json:"project_id"`
+	RepositoryID int64 `json:"repository_id"`
+	// the name of the project
+	RepositoryName string `json:"repository_name"`
+	//
 	MergeRequestID int64 `json:"merge_request_id"`
 	//
 	MergeCommitMessage string `json:"merge_commit_message"`
@@ -28,9 +32,21 @@ type MergeeRequest struct {
 type MergeResponse = MergeRequest
 
 func Merge(client client.Client, req *MergeeRequest) (*MergeResponse, error) {
+	if req.RepositoryName != "" && req.RepositoryID == 0 {
+		repository, err := repository.Get(client, req.RepositoryName)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get repository by name: %v", err)
+		}
+
+		req.RepositoryID = repository.ID
+	}
+
+	// fmt.Println("req.RepositoryID", req.RepositoryID)
+	// fmt.Println("req.MergeRequestID", req.MergeRequestID)
+
 	response, err := client.Request(MergeConfig, &request.Payload{
 		Params: map[string]string{
-			"project_id":       strconv.Itoa(int(req.ProjectID)),
+			"project_id":       strconv.Itoa(int(req.RepositoryID)),
 			"merge_request_id": strconv.Itoa(int(req.MergeRequestID)),
 		},
 		Body: map[string]any{
@@ -40,7 +56,6 @@ func Merge(client client.Client, req *MergeeRequest) (*MergeResponse, error) {
 			"should_remove_source_branch": req.ShouldRemoveSourceBranch,
 		},
 	})
-
 	if err != nil {
 		return nil, err
 	}
